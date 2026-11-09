@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoiceDose - Voice Medication Reminder for Elders</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="header">
+    <a href="/" class="brand">
+      <div class="brand-icon">💊</div>
+      <div>
+        <div class="brand-title">VoiceDose</div>
+        <div class="brand-tagline">Gnani AI Voice Assistant</div>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="/" class="nav-btn active">👵 Elder Voice Reminder</a>
+      <a href="/caregiver" class="nav-btn">
+        👨‍⚕️ Caregiver Dashboard
+        <span class="badge-tag">Live</span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- Main Patient View -->
+  <main class="main-container">
+
+    <!-- Language Selector Bar -->
+    <section class="lang-selector-bar">
+      <div class="lang-label">
+        <span>🌐</span>
+        <span>Choose Voice Language / భాష / भाषा:</span>
+      </div>
+      <div class="lang-buttons" id="langButtonsContainer">
+        <button class="lang-pill active" data-lang="te-IN">తెలుగు (Telugu)</button>
+        <button class="lang-pill" data-lang="hi-IN">हिंदी (Hindi)</button>
+        <button class="lang-pill" data-lang="en-IN">English</button>
+      </div>
+    </section>
+
+    <!-- Patient Profile Greeting -->
+    <section class="patient-greeting-card">
+      <div class="patient-info-left">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=256&q=80" 
+             alt="Patient" class="patient-avatar" id="patientAvatar">
+        <div>
+          <div class="patient-name-greet" id="patientGreeting">నమస్కారం, అనసూయ గారు!</div>
+          <div class="patient-subtext" id="patientCondition">74 yrs • Blood Pressure & Diabetes</div>
+        </div>
+      </div>
+      <div class="today-time-badge">
+        <div class="today-date" id="liveDate">Today</div>
+        <div class="today-clock" id="liveClock">--:-- --</div>
+      </div>
+    </section>
+
+    <!-- Active Dose Hero Card -->
+    <section class="active-dose-card" id="activeDoseCard">
+      <div class="dose-card-header">
+        <span class="dose-slot-tag" id="doseSlotBadge">🌅 Morning Dose</span>
+        <span class="status-badge status-pending" id="doseStatusBadge">● Pending Confirmation</span>
+      </div>
+
+      <div class="dose-main-content">
+        <div class="medicine-title">
+          <span id="medName">Amlodipine</span>
+          <span class="medicine-dosage" id="medDosage">5 mg</span>
+        </div>
+        <div class="dose-purpose" id="medPurpose">For Blood Pressure Regulation</div>
+        <div class="dose-instructions-box" id="medInstructions">
+          <span>💧</span>
+          <span id="medInstructionsText">Take after breakfast with a glass of warm water.</span>
+        </div>
+      </div>
+
+      <!-- Spoken Reminder Action -->
+      <div class="audio-reminder-action">
+        <button class="btn-listen" id="btnListenReminder">
+          <span id="listenIcon">🔊</span>
+          <span id="listenLabel">Listen to Reminder (Timbre TTS)</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Voice Interactive Center -->
+    <section class="voice-interactive-section">
+      <h2 class="voice-heading" id="voiceActionHeading">Reply by Voice</h2>
+      <p class="voice-subheading" id="voiceActionSubheading">
+        Tap the large button below and speak clearly: 
+        <strong>"వేసుకున్నాను"</strong> (Taken) or <strong>"ఇంకా లేదు"</strong> (Not yet) or <strong>"తర్వాత"</strong> (Snooze).
+      </p>
+
+      <!-- Big Microphone Button -->
+      <div class="mic-wrapper">
+        <button class="btn-mic" id="btnRecord" title="Press to speak">
+          🎙️
+        </button>
+      </div>
+
+      <div class="mic-status-label" id="micStatusLabel">Tap to Speak</div>
+      <div class="mic-instruction" id="micInstruction">Click once to start recording, click again when done</div>
+
+      <!-- Soundwave Bars Visualizer -->
+      <div class="waveform-bars" id="waveformVisualizer">
+        <div class="waveform-bar"></div>
+        <div class="waveform-bar"></div>
+        <div class="waveform-bar"></div>
+        <div class="waveform-bar"></div>
+        <div class="waveform-bar"></div>
+        <div class="waveform-bar"></div>
+        <div class="waveform-bar"></div>
+        <div class="waveform-bar"></div>
+      </div>
+
+      <!-- Speech Processing & Intent Result Card -->
+      <div class="interaction-result-card" id="interactionResultCard">
+        <div class="result-header">
+          <span class="result-tag" id="resultEngineTag">⚡ Recognized by Gnani Prisma STT</span>
+          <span class="status-badge" id="resultIntentBadge">Intent: Taken</span>
+        </div>
+
+        <div class="transcript-quote">
+          <span>💬</span>
+          <div>
+            <div style="font-size: 0.8rem; color: #64748b; font-weight: 700;">WHAT YOU SAID:</div>
+            <div id="resultTranscriptText" style="font-size: 1.25rem; font-weight: 700;">"వేసుకున్నాను"</div>
+          </div>
+        </div>
+
+        <div class="confirmation-speech-box">
+          <div style="font-size: 0.8rem; color: #047857; font-weight: 700; margin-bottom: 0.25rem;">
+            🔊 TIMBRE TTS SPOKEN CONFIRMATION:
+          </div>
+          <div id="resultConfirmationText">
+            చాలా మంచిది అనసూయ గారు! మీరు మందు తీసుకున్నట్లు నమోదు చేశాను.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Voice Test Pills (Fail-safe for presentations and quick clicks) -->
+    <section class="demo-phrases-drawer">
+      <div class="drawer-title">
+        <span>⚡</span>
+        <span>Quick Test Voice Phrases (Click to simulate speaking):</span>
+      </div>
+      <div class="phrase-pills-row" id="quickPhrasesRow">
+        <!-- Rendered dynamically according to selected language -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Audio playback element -->
+  <audio id="ttsAudioPlayer" style="display: none;"></audio>
+
+  <!-- Footer -->
+  <footer class="footer">
+    VoiceDose • Powered by <a href="https://docs.gnani.ai/" target="_blank">Gnani.ai Timbre TTS & Prisma STT</a> • Built with FastAPI & SQLite
+  </footer>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

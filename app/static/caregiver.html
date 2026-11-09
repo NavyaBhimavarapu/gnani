@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caregiver Dashboard - VoiceDose</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="header">
+    <a href="/" class="brand">
+      <div class="brand-icon">💊</div>
+      <div>
+        <div class="brand-title">VoiceDose</div>
+        <div class="brand-tagline">Caregiver Monitoring Portal</div>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="/" class="nav-btn">👵 Elder Voice Reminder</a>
+      <a href="/caregiver" class="nav-btn active">
+        👨‍⚕️ Caregiver Dashboard
+        <span class="badge-tag">Live</span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- Caregiver Dashboard Container -->
+  <main class="container-wide">
+
+    <!-- Patient & Caregiver Summary Hero Banner -->
+    <section class="caregiver-hero">
+      <div class="patient-profile-header">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=256&q=80" 
+             alt="Patient Profile" class="profile-avatar-large">
+        <div>
+          <div class="profile-name" id="cgPatientName">Anasuya Devi</div>
+          <div class="profile-tags">
+            <span class="profile-tag">👵 74 Years Old</span>
+            <span class="profile-tag">🩺 Hypertension & Diabetes</span>
+            <span class="profile-tag">🗣️ Languages: Telugu, Hindi, English</span>
+            <span class="profile-tag">👨‍👦 Caregiver: Karthik Rao (Son)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="caregiver-actions-top">
+        <button class="btn-secondary" id="btnResetDemo" title="Reset all doses to initial pending state for demo recording">
+          🔄 Reset Demo Doses
+        </button>
+        <button class="btn-primary-action" id="btnRefreshNow">
+          ⚡ Refresh Status
+        </button>
+      </div>
+    </section>
+
+    <!-- Key Metrics & Adherence Cards -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div>
+          <div class="stat-info-title">Today's Doses</div>
+          <div class="stat-info-value" id="statTotal">4</div>
+        </div>
+        <div class="stat-card-icon icon-blue">📋</div>
+      </div>
+
+      <div class="stat-card">
+        <div>
+          <div class="stat-info-title">Taken & Verified</div>
+          <div class="stat-info-value" style="color: #16a34a;" id="statTaken">0</div>
+        </div>
+        <div class="stat-card-icon icon-green">✅</div>
+      </div>
+
+      <div class="stat-card">
+        <div>
+          <div class="stat-info-title">Pending Confirmation</div>
+          <div class="stat-info-value" style="color: #d97706;" id="statPending">4</div>
+        </div>
+        <div class="stat-card-icon icon-amber">⏳</div>
+      </div>
+
+      <div class="stat-card">
+        <div>
+          <div class="stat-info-title">Snoozed / Missed</div>
+          <div class="stat-info-value" style="color: #7c3aed;" id="statSnoozed">0</div>
+        </div>
+        <div class="stat-card-icon icon-purple">⏰</div>
+      </div>
+    </section>
+
+    <!-- Today's Medication Timeline List -->
+    <section>
+      <div class="section-title">
+        <span>📅 Today's Medication Schedule</span>
+        <span style="font-size: 0.9rem; font-weight: 500; color: #64748b;">
+          Auto-refreshing every 4 seconds • Powered by Gnani VoiceOS
+        </span>
+      </div>
+
+      <div class="doses-timeline-list" id="dosesTimelineList">
+        <!-- Rendered dynamically -->
+        <div style="padding: 2rem; text-align: center; color: #64748b;">Loading doses...</div>
+      </div>
+    </section>
+
+    <!-- Real-time Voice Interaction Activity Feed -->
+    <section>
+      <div class="section-title">
+        <span>🎙️ Recent Voice Interaction Logs (Prisma STT & Timbre TTS)</span>
+      </div>
+
+      <div class="logs-table-wrapper">
+        <table class="logs-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Medicine / Slot</th>
+              <th>Language</th>
+              <th>Heard Transcript (Prisma STT)</th>
+              <th>Matched Intent</th>
+              <th>Spoken Response (Timbre TTS)</th>
+            </tr>
+          </thead>
+          <tbody id="logsTableBody">
+            <!-- Rendered dynamically -->
+            <tr>
+              <td colspan="6" style="text-align: center; color: #94a3b8; padding: 1.5rem;">
+                No voice interactions recorded yet today.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    VoiceDose Caregiver Dashboard • Real-time Monitoring for Elderly Care • Connected to SQLite & Gnani AI
+  </footer>
+
+  <script src="/static/js/caregiver.js"></script>
+</body>
+</html>
